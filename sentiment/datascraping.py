@@ -1,7 +1,5 @@
 import praw
 import string
-from nltk.corpus import stopwords
-import nltk
 from preprocess import Preprocess
 from collections import Counter
 
@@ -16,10 +14,18 @@ reddit = praw.Reddit(client_id=KEY,
 
 stock = 'AAPL'
 
+terms = []
 for post in reddit.subreddit('wallstreetbets').search(stock,sort="relevance",limit=2):
-    counter.update(process.preprocess(post.title))
-    counter.update(process.preprocess(post.selftext))
+    terms.append(word for word in process.preprocess(post.title))
+    terms.append(word for word in process.preprocess(post.selftext))
     for i in range(1,5):
-        counter.update(process.preprocess(post.comments[i].body))
+        terms.append(word for word in process.preprocess(post.comments[i].body))
 
+stopword = list(string.punctuation) + ['AAPL']
+with open("english.txt", "r") as my_file:
+    for line in my_file:
+        stopword.append(line)
+
+terms = [term for term in terms if term not in stopword]
+counter.update(terms)
 print(counter.most_common(5))
