@@ -1,5 +1,5 @@
 import praw
-from preprocess import Preprocess
+from sentiment.preprocess import Preprocess
 
 KEY = "m3cPpLyaVlE0JxcZBkIFaA"
 SECRET = "Fvk4PgPavpfb8TR4wnKMMz5nF5a8HA"
