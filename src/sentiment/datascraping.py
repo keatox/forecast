@@ -1,10 +1,16 @@
 import praw
 import string
+import os         
+from dotenv import load_dotenv, find_dotenv
 from collections import Counter
 from preprocess import Preprocess
 
-KEY = "m3cPpLyaVlE0JxcZBkIFaA"
-SECRET = "Fvk4PgPavpfb8TR4wnKMMz5nF5a8HA"
+load_dotenv(find_dotenv())
+KEY = os.getenv("REDDIT_API_KEY")
+SECRET = os.getenv("REDDIT_API_SECRET")
+
+#array? https://oxylabs.io/blog/how-to-make-web-scraping-faster  multiprocessing
+
 
 process = Preprocess()
 counter = Counter()
@@ -22,7 +28,7 @@ for post in reddit.subreddit('wallstreetbets').search(stock,sort="relevance",lim
         terms.extend(word for word in process.preprocess(post.comments[i].body))
 
 stopword = list(string.punctuation) + [stock.lower(),'“','”']
-with open("sentiment/english.txt", "r") as my_file:
+with open("res/english.txt", "r") as my_file:
     for line in my_file:
         stopword.append(line.strip())
 
