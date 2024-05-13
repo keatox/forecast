@@ -2,14 +2,14 @@ import re
 
 class Preprocess:
     def __init__(self):
-        self.emoticons = r"""
+        self._emoticons = r"""
             (?:
                 [:=;] # Eyes
                 [oO\-]? # Nose (optional)
                 [D\)\]\(\]/\\OpP] # Mouth
             )"""
-        self.regex = [
-            self.emoticons,
+        self._regex = [
+            self._emoticons,
             r'<[^>]+>', # HTML tags
             r'(?:@[\w_]+)', # @-mentions
             r"(?:\#+[\w_]+[\w\'_\-]*[\w_]+)", # hash-tags
@@ -21,11 +21,11 @@ class Preprocess:
         ]
     
     def tokenize(self,s):
-        tokens_re = re.compile(r'('+'|'.join(self.regex)+')', re.VERBOSE | re.IGNORECASE)
+        tokens_re = re.compile(r'('+'|'.join(self._regex)+')', re.VERBOSE | re.IGNORECASE)
         return tokens_re.findall(s)
     
     def preprocess(self,s, lowercase=False):
-        emoticon_re = re.compile(r'^'+self.emoticons+'$', re.VERBOSE | re.IGNORECASE)
+        emoticon_re = re.compile(r'^'+self._emoticons+'$', re.VERBOSE | re.IGNORECASE)
         tokens = self.tokenize(s)
         if lowercase:
             tokens = [token if emoticon_re.search(token) else token.lower() for token in tokens]
