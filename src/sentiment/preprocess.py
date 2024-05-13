@@ -2,25 +2,23 @@ import re
 
 class Preprocess:
     def __init__(self):
-        self._emoticons = r"""
-            (?:
-                [:=;] # Eyes
-                [oO\-]? # Nose (optional)
-                [D\)\]\(\]/\\OpP] # Mouth
-            )"""
-        self._regex = [
-            self._emoticons,
-            r'<[^>]+>', # HTML tags
-            r'(?:@[\w_]+)', # @-mentions
-            r"(?:\#+[\w_]+[\w\'_\-]*[\w_]+)", # hash-tags
-            r'http[s]?://(?:[a-z]|[0-9]|[$-_@.&amp;+]|[!*\(\),]|(?:%[0-9a-f][0-9a-f]))+', # URLs
-            r'(?:(?:\d+,?)+(?:\.?\d+)?)', # numbers
-            r"(?:[a-z][a-z’\'\-_]+[a-z])", # words with - and '
-            r'(?:[\w_]+)', # other words
-            r'(?:\S)' # anything else
-        ]
+        self._emoticons = r"""(?:
+                              [:=;]             # Eyes
+                              [oO\-]?           # Nose 
+                              [D\)\]\(\]/\\OpP] # Mouth
+                              )"""
+        self._regex = [self._emoticons,
+                       r'<[^>]+>',                       # HTML tags
+                       r'(?:@[\w_]+)',                   # @-mentions
+                       r"(?:\#+[\w_]+[\w\'_\-]*[\w_]+)", # hash-tags
+                       r'http[s]?://(?:[a-z]|[0-9]|[$-_@.&amp;+]|[!*\(\),]|(?:%[0-9a-f][0-9a-f]))+', # URLs
+                       r'(?:(?:\d+,?)+(?:\.?\d+)?)',     # numbers
+                       r"(?:[a-z][a-z’\'\-_]+[a-z])",    # words with - and '
+                       r'(?:[\w_]+)',                    # other words
+                       r'(?:\S)'                         # anything else
+                       ]
     
-    def tokenize(self,s):
+    def tokenize(self,s):    
         tokens_re = re.compile(r'('+'|'.join(self._regex)+')', re.VERBOSE | re.IGNORECASE)
         return tokens_re.findall(s)
     
