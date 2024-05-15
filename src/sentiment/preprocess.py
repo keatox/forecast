@@ -9,7 +9,6 @@ class Preprocess:
                               [D\)\]\(\]/\\OpP] # Mouth
                               )"""
         self._regex = [self._emoticons,
-                       r'<[^>]+>',                       # HTML tags
                        r'(?:@[\w_]+)',                   # @-mentions
                        r"(?:\#+[\w_]+[\w\'_\-]*[\w_]+)", # hash-tags
                        r'http[s]?://(?:[a-z]|[0-9]|[$-_@.&amp;+]|[!*\(\),]|(?:%[0-9a-f][0-9a-f]))+', # URLs
@@ -20,6 +19,7 @@ class Preprocess:
                        ]
     
     def tokenize(self,s):    
+        s = re.sub(r'<[^>]+>',"",s)
         tokens_re = re.compile(r'('+'|'.join(self._regex)+')', re.VERBOSE | re.IGNORECASE)
         return tokens_re.findall(s)
     
@@ -30,7 +30,7 @@ class Preprocess:
             tokens = [token if emoticon_re.search(token) else token.lower() for token in tokens]
         return tokens
     
-    def remove_stopwords(self,terms,stock):
+    def remove_stopwords(self,terms,stock=" "):
         stopword = list(string.punctuation) + [stock.lower(),'“','”']
         with open("res/english.txt", "r") as my_file:
             for line in my_file:
