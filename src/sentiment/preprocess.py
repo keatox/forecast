@@ -1,4 +1,5 @@
 import re
+import string
 
 class Preprocess:
     def __init__(self):
@@ -28,3 +29,12 @@ class Preprocess:
         if lowercase:
             tokens = [token if emoticon_re.search(token) else token.lower() for token in tokens]
         return tokens
+    
+    def remove_stopwords(self,terms,stock):
+        stopword = list(string.punctuation) + [stock.lower(),'“','”']
+        with open("res/english.txt", "r") as my_file:
+            for line in my_file:
+                stopword.append(line.strip())
+        for i in range(len(terms)):
+            terms[i] = " ".join([term for term in terms[i] if term.lower() not in stopword])
+        return terms
