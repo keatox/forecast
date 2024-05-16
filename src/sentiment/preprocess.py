@@ -36,5 +36,5 @@ class Preprocess:
             for line in my_file:
                 stopword.append(line.strip())
         for i in range(len(terms)):
-            terms[i] = " ".join([term for term in terms[i] if term.lower() not in stopword])
+            terms[i] = " ".join([term for term in terms[i] if term.lower() not in stopword]).lower()
         return terms
