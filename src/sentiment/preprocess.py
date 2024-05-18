@@ -8,7 +8,7 @@ class Preprocess:
                               [oO\-]?           # Nose 
                               [D\)\]\(\]/\\OpP] # Mouth
                               )"""
-        self.__regex = [self._emoticons,
+        self.__regex = [self.__emoticons,
                        r'(?:@[\w_]+)',                   # @-mentions
                        r"(?:\#+[\w_]+[\w\'_\-]*[\w_]+)", # hash-tags
                        r'http[s]?://(?:[a-z]|[0-9]|[$-_@.&amp;+]|[!*\(\),]|(?:%[0-9a-f][0-9a-f]))+', # URLs
