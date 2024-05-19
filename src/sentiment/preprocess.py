@@ -17,24 +17,25 @@ class Preprocess:
                        r'(?:[\w_]+)',                    # other words
                        r'(?:\S)'                         # anything else
                        ]
+        self.__stopwords = self.init_stopwords()
+
+    def preprocess(self,s):
+        tokens = [self.tokenize(phrase) for phrase in s]
+        return self.remove_stopwords(tokens)
     
     def tokenize(self,s):    
         s = re.sub(r'<[^>]+>',"",s)
         tokens_re = re.compile(r'('+'|'.join(self.__regex)+')', re.VERBOSE | re.IGNORECASE)
         return tokens_re.findall(s)
     
-    def preprocess(self,s, lowercase=False):
-        emoticon_re = re.compile(r'^'+self.__emoticons+'$', re.VERBOSE | re.IGNORECASE)
-        tokens = self.tokenize(s)
-        if lowercase:
-            tokens = [token if emoticon_re.search(token) else token.lower() for token in tokens]
-        return tokens
-    
-    def remove_stopwords(self,terms,stock=" "):
-        stopword = list(string.punctuation) + [stock.lower(),'“','”']
+    def init_stopwords(self):
+        stopword = list(string.punctuation)
         with open("res/english.txt", "r") as my_file:
             for line in my_file:
                 stopword.append(line.strip())
+        return stopword
+    
+    def remove_stopwords(self,terms):
         for i in range(len(terms)):
-            terms[i] = " ".join([term for term in terms[i] if term.lower() not in stopword]).lower()
+            terms[i] = " ".join([term for term in terms[i] if term.lower() not in self.__stopwords]).lower()
         return terms
