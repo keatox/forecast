@@ -1,43 +1,60 @@
 from preprocess import Preprocess
-import numpy as np
 import pandas as pd
-import matplotlib as plt
 from sklearn.svm import LinearSVC
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.model_selection import train_test_split
 
 class Sentimodel:
     def __init__(self):
-        self._data = pd.read_csv("res/IMDB.csv")
-        self._process = Preprocess()
-        self._X = self._data["review"].values.tolist()
-        self._Y = self._data["sentiment"].values
+        self.__data = pd.read_csv("res/IMDB.csv")
+        self.__process = Preprocess()
+        self.__X = self.__data["review"].values.tolist()
+        self.__Y = self.__data["sentiment"].values
+        self.__model = self.tune_model()
+
+    def prediction(self,text):
+        return self.__model.predict(text)
+    
+    def vectorize(self,data):
+        vectorizer = CountVectorizer(max_features = 2500,
+                                     preprocessor=self.override,
+                                     token_pattern='[a-zA-Z0-9$&+,:;=?@#|<>.^*()%!-]+')
+        return vectorizer.fit_transform(data).toarray()  
 
     def override(self,text):
         return text
     
     def process(self):
-        for i in range(len(self._X)):
-            self._X[i] = self._process.preprocess(self._X[i])
-        self._X = self._process.remove_stopwords(self._X) 
-        self._X = self.vectorize(self._X)
-    
-    def vectorize(self,data):
-        vectorizer = CountVectorizer(max_features = 300,
-                                     preprocessor=self.override,
-                                     token_pattern='[a-zA-Z0-9$&+,:;=?@#|<>.^*()%!-]+')
-        return vectorizer.fit_transform(data).toarray()    
+        # for i in range(len(self.__X)):
+        #     print(i)
+        self.__X = self.__process.preprocess(self.__X)
+        self.__X = self.vectorize(self.__X)
 
     def tune_model(self):
-        X, Xt, Y, Yt = train_test_split(self._X, self._Y, test_size = 0.20, random_state = 0)
+        self.process()
+        X, Xt, Y, Yt = train_test_split(self.__X, self.__Y, test_size = 0.20, random_state = 0)
 
-        model = LinearSVC(dual='auto').fit(X,Y)
+        # below code can be used to help optimize model
+        """
+        import numpy as np
+        import matplotlib.pyplot as plt
+    
+        C = np.logspace(-10,10,50)
+        acc = np.empty(50)
+        acct = np.empty(50)
+        for i in range(50):
+            model = LinearSVC(dual='auto',C=C[i],fit_intercept=False).fit(X,Y)
+            acc[i] = model.score(X,Y)
+            acct[i] = model.score(Xt,Yt)
+        plt.plot(acc,label="train")
+        plt.plot(acct,label="test")
+        plt.legend()
+        plt.show()
+        print(C[np.argmax(acc)])
+        print(C[np.argmax(acct)])
+        """
+
+        model = LinearSVC(dual='auto',C=0.245,fit_intercept=False).fit(X,Y)
         print(model.score(X,Y))
         print(model.score(Xt,Yt))
-
-    def return_model(self):
-        pass
-
-model = Sentimodel()
-model.process()
-model.tune_model()
+        return model
