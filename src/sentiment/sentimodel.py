@@ -15,20 +15,20 @@ class Sentimodel:
     def prediction(self,text):
         return self.__model.predict(text)
     
-    def vectorize(self,data):
+    def vectorize(self,data,train=False):
         vectorizer = CountVectorizer(max_features = 2500,
                                      preprocessor=self.override,
                                      token_pattern='[a-zA-Z0-9$&+,:;=?@#|<>.^*()%!-]+')
-        return vectorizer.fit_transform(data).toarray()  
+        if train:
+            vectorizer.fit(data)
+        return vectorizer.transform(data).toarray()  
 
     def override(self,text):
         return text
     
     def process(self):
-        # for i in range(len(self.__X)):
-        #     print(i)
         self.__X = self.__process.preprocess(self.__X)
-        self.__X = self.vectorize(self.__X)
+        self.__X = self.vectorize(self.__X,True)
 
     def tune_model(self):
         self.process()
