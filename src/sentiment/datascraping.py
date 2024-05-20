@@ -17,21 +17,24 @@ reddit = praw.Reddit(client_id=KEY,
 
 def scrape(stock):
     terms = []
-    for post in reddit.subreddit('wallstreetbets').search(stock,sort="relevance",limit=10):
+    for post in reddit.subreddit('wallstreetbets').search(stock,sort="relevance",limit=5):
         terms.append([post.title])
         terms.append([post.selftext])
         for i in range(1,5):
             terms.append([post.comments[i].body])
-    terms = [process.preprocess(term)[0] for term in terms]
-    terms = model.vectorize(terms)
+    tokens = [process.preprocess(term)[0] for term in terms]
 
-    predictions = model.prediction(terms)
-    print(predictions)
+    #remove vectorized terms with 0 counts all around?
+    tokens = model.vectorize(tokens)
+    predictions = model.prediction(tokens)
+
+    [print(terms[i][0],[predictions[i].upper()]) for i in range(len(predictions))]
+
     sum = 0
     for pred in predictions:
         if pred == 'positive':
             sum += 1
     print(sum/len(predictions))
 
-stock = 'NVDA'
+stock = 'AAPL'
 scrape(stock)
