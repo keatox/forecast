@@ -10,25 +10,26 @@ class Sentimodel:
         self.__process = Preprocess()
         self.__X = self.__data["review"].values.tolist()
         self.__Y = self.__data["sentiment"].values
+        self.__vectorizer = None
         self.__model = self.tune_model()
 
     def prediction(self,text):
         return self.__model.predict(text)
     
-    def vectorize(self,data,train=False):
-        vectorizer = CountVectorizer(max_features = 2500,
-                                     preprocessor=self.override,
-                                     token_pattern='[a-zA-Z0-9$&+,:;=?@#|<>.^*()%!-]+')
-        if train:
-            vectorizer.fit(data)
-        return vectorizer.transform(data).toarray()  
+    def vectorize(self,data):
+        if not self.__vectorizer:
+            vectorizer = CountVectorizer(max_features = 2500,
+                                         preprocessor=self.override,
+                                         token_pattern='[a-zA-Z0-9$&+,:;=?@#|<>.^*()%!-]+')
+            self.__vectorizer = vectorizer.fit(data)
+        return self.__vectorizer.transform(data).toarray()  
 
     def override(self,text):
         return text
     
     def process(self):
         self.__X = self.__process.preprocess(self.__X)
-        self.__X = self.vectorize(self.__X,True)
+        self.__X = self.vectorize(self.__X)
 
     def tune_model(self):
         self.process()
