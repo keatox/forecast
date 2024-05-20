@@ -21,12 +21,14 @@ class Sentimodel:
         if not self.__vectorizer:
             with open("models/countvectorizer.pkl", "rb") as f:
                 self.__vectorizer = pickle.load(f)
-            # vectorizer = CountVectorizer(max_features = 2500,
-            #                              preprocessor=self.override,
-            #                              token_pattern='[a-zA-Z0-9$&+,:;=?@#|<>.^*()%!-]+')
-            # self.__vectorizer = vectorizer.fit(data)
-            # with open("models/countvectorizer.pkl", "wb") as f:
-            #     pickle.dump(self.__vectorizer, f)
+            """
+            vectorizer = CountVectorizer(max_features = 2500,
+                                         preprocessor=self.override,
+                                         token_pattern='[a-zA-Z0-9$&+,:;=?@#|<>.^*()%!-]+')
+            self.__vectorizer = vectorizer.fit(data)
+            with open("models/countvectorizer.pkl", "wb") as f:
+                pickle.dump(self.__vectorizer, f)
+            """
         return self.__vectorizer.transform(data).toarray()  
 
     def override(self,text):
