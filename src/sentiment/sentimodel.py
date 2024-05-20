@@ -3,6 +3,7 @@ import pandas as pd
 from sklearn.svm import LinearSVC
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.model_selection import train_test_split
+import pickle
 
 class Sentimodel:
     def __init__(self):
@@ -32,6 +33,9 @@ class Sentimodel:
         self.__X = self.vectorize(self.__X)
 
     def tune_model(self):
+        with open("models/sentimentmodel.pkl", "rb") as f:
+             return pickle.load(f)
+
         self.process()
         X, Xt, Y, Yt = train_test_split(self.__X, self.__Y, test_size = 0.20, random_state = 0)
 
@@ -56,6 +60,8 @@ class Sentimodel:
         """
 
         model = LinearSVC(dual='auto',C=0.245,fit_intercept=False).fit(X,Y)
-        print(model.score(X,Y))
-        print(model.score(Xt,Yt))
+        # print(model.score(X,Y))
+        # print(model.score(Xt,Yt))
+        with open("models/sentimentmodel.pkl", "wb") as f:
+            pickle.dump(model, f)
         return model
