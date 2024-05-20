@@ -1,7 +1,6 @@
 from preprocess import Preprocess
 import pandas as pd
 from sklearn.svm import LinearSVC
-from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.model_selection import train_test_split
 import pickle
 
@@ -14,14 +13,20 @@ class Sentimodel:
         self.__vectorizer = None
         self.__model = self.tune_model()
 
+    # returns a list of predictions with either POSITIVE or NEGATIVE sentiment
     def prediction(self,text):
         return self.__model.predict(text)
     
+    # generates bag-of-words representation of text
     def vectorize(self,data):
+        # loads vectorizer pretrained on IMDB dataset
         if not self.__vectorizer:
             with open("models/countvectorizer.pkl", "rb") as f:
                 self.__vectorizer = pickle.load(f)
+            # uncomment below when fitting new data for vectorizer
             """
+            from sklearn.feature_extraction.text import CountVectorizer
+
             vectorizer = CountVectorizer(max_features = 2500,
                                          preprocessor=self.override,
                                          token_pattern='[a-zA-Z0-9$&+,:;=?@#|<>.^*()%!-]+')
@@ -31,13 +36,16 @@ class Sentimodel:
             """
         return self.__vectorizer.transform(data).toarray()  
 
+    # to override preprocessing step in vectorization
     def override(self,text):
         return text
     
+    # new processing method that override accounts for
     def process(self):
         self.__X = self.__process.preprocess(self.__X)
         self.__X = self.vectorize(self.__X)
 
+    # loads pretrained sentiment model, includes code to retrain/test
     def tune_model(self):
         with open("models/sentimentmodel.pkl", "rb") as f:
              return pickle.load(f)
