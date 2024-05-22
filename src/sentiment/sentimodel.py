@@ -6,7 +6,7 @@ import pickle
 
 class Sentimodel:
     def __init__(self):
-        self.__data = pd.read_csv("res/IMDB.csv")
+        self.__data = pd.read_csv("static/IMDB.csv")
         self.__process = Preprocess()
         self.__X = self.__data["review"].values.tolist()
         self.__Y = self.__data["sentiment"].values
