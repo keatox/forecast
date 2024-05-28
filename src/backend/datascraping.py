@@ -37,8 +37,3 @@ class Datascraping:
             if predictions[i] == 'positive':
                 sum += 1
         print("%.2f" % (10 * sum/len(predictions)))
-
-    # hardcoded stock for now
-scraper = Datascraping()
-stock = 'DOGE'
-scraper.scrape(stock)
