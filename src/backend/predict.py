@@ -5,6 +5,9 @@ import pandas as pd
 from scipy.stats import norm
 import matplotlib.pyplot as plt
 import seaborn as sns
+from datascraping import Datascraping
+
+scraper = Datascraping()
 
 #add error handling for invalid stock etc
 stock = 'AAPL'
