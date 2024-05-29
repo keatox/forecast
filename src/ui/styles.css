@@ -8,21 +8,81 @@ body{
     padding: 0;
 }
 
+.darkmodebody{
+    background-color: #c3c3c3;
+    color: #2c2c2c;
+}
+
+#dropdown{
+    position: relative;
+    z-index: 500;
+    background-color: #4c4c4c;
+    margin: 0;
+    margin-top: 9px;
+    display: -ms-grid;
+    display: grid;
+    grid-template-rows: 1fr repeat(4, 0.5fr);
+    grid-row-gap: 25px;
+    padding: 0;
+    list-style: none;
+    clear: both;
+    width: auto;
+    text-align: center;
+    height: 0px;
+    overflow: hidden;
+    transition: height .4s ease;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+#dropdown a:first-child {
+    margin-top: 30px;
+}
+  
+#dropdown a:last-child {
+    margin-bottom: 30px;
+}
+
+#menu:checked ~ #dropdown {
+    height: 340px;
+  }
+
+.link {
+    width: 100%;
+    margin: 0;
+    padding: 10px 0;
+    font-size: 20px;
+}
+
+.link:hover {
+    background-color: #a2a2a2;
+    color: rgb(61, 61, 61);
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
 #header{
     display: flex;
     margin-bottom: 2%;
     background-color: rgba(97, 97, 97, 0.25);
+    height: 60px;
 }
 
 #sitename{
     flex: 3;
     font-size: 25px;
-    padding: 1%;
+    margin-top: 16px;
+
 }
 
 #menu{
-    width: 30px;
+    display: none;
 }
+
+a, button{
+    color: #fff;
+    text-decoration: none;
+  }
 
 nav{
     flex: 1;
@@ -38,7 +98,7 @@ nav{
     display: flex;
     flex-direction: column;
     flex: 2;
-    margin-left: 1%;
+    margin-left: 2%;
     margin-right: 1%;
     padding: 1%;
     padding-top: 0;
@@ -46,22 +106,37 @@ nav{
 
 #plot{
     width: 100%;
-    height: 100%;
     border-radius: 5px; 
-    margin-bottom: 1%;
+    margin-bottom: 2%;
     box-shadow: 0 10px 10px rgb(0 0 0 / 0.3);
 }
 
-aside{
-    flex: 0.6;
+.data{
+    height: 100%;
+    text-align: left;
+    background-color: #3a3b3c;
+    border-radius: 5px;
+}
+
+#block{
     border-width: 0px;
     border-style: solid;
-    text-align: center;
-    margin-right: 2%;
-    padding: 2%;
-    border-radius: 20px; 
-    background-color: #3a3b3c;
+    padding: 2%; 
     box-shadow: 0 10px 10px rgb(0 0 0 / 0.2);
+    margin-bottom: 2%;
+}
+
+.sidebar{
+    flex: 0.6;
+    text-align: center;
+    background-color: #3a3b3c;
+    margin-left: 1%;
+    margin-right: 3%;
+    border-radius: 20px;
+}
+
+.darkmodeblock{
+    background-color: #c1c2c3;
 }
 
 #sentiment{
@@ -73,4 +148,15 @@ aside{
     #content{
         flex-direction: column; 
     }
+
+    .sidebar{
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+}
+
+#landingsearch{
+    height: 40px;
+    width: 50%;
+    border-radius: 20px;
 }
