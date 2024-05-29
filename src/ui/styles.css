@@ -1,0 +1,75 @@
+body{  
+    background-color: #333333;
+    color: #d3d3d3;
+    font-family: "Arial";
+    background-image: url("/static/imgs/background.png");
+    background-blend-mode: overlay;
+    margin: 0;
+    padding: 0;
+}
+
+#header{
+    display: flex;
+    margin-bottom: 2%;
+    background-color: rgba(97, 97, 97, 0.25);
+}
+
+#sitename{
+    flex: 3;
+    font-size: 25px;
+    padding: 1%;
+}
+
+#menu{
+    width: 8%;
+}
+
+nav{
+    flex: 1;
+    padding: 1%;
+    text-align: right;
+}
+
+#content{
+    display: flex;
+}
+
+#graph{
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+    margin-left: 1%;
+    margin-right: 1%;
+    padding: 1%;
+    padding-top: 0;
+}
+
+#plot{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px; 
+    margin-bottom: 1%;
+    box-shadow: 0 10px 10px rgb(0 0 0 / 0.3);
+}
+
+aside{
+    flex: 0.6;
+    border-width: 0px;
+    border-style: solid;
+    text-align: center;
+    margin-right: 2%;
+    padding: 2%;
+    border-radius: 20px; 
+    background-color: #3a3b3c;
+    box-shadow: 0 10px 10px rgb(0 0 0 / 0.2);
+}
+
+#sentiment{
+    font-size: 30px;
+}
+
+@media (max-width: 500px){
+    #content{
+        flex-direction: column; 
+    }
+}
