@@ -17,7 +17,7 @@ function toggleDarkmode(){
 function handle(input){
     if (input.keyCode === 13){
         input.preventDefault();
-        window.location.href = "dashboard.html";
+        window.location.href = "dashboard";
     }
 }
 

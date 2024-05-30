@@ -2,29 +2,27 @@
 <html>
 
 <head>
-    <title>Help</title>
+    <title>About</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width"/>
     <link rel="shortcut icon" href="/static/imgs/favicon.ico" type="image/x-icon"/>
     <link rel="icon" href="/static/imgs/favicon.ico" type="image/x-icon"/>
-    <link rel='stylesheet' type='text/css' href='styles.css'/>
-    <script src="scripts.js"></script>
-    <!--"{{ url_for('static',filename='styles.css') }}"-->
-    <!-- <script src="{{url_for('static', filename='scripts.js')}}"></script> -->
+    <link rel='stylesheet' type='text/css' href="{{ url_for('static',filename='styles.css') }}">
+    <script src="{{url_for('static', filename='scripts.js')}}"></script>
 </head>
 
 <body>
     <div id="header">
         <img src="/static/imgs/logo.png"/>
-        <div id="sitename">| &nbsp;Help</div>
+        <div id="sitename">| &nbsp;About</div>
         <nav id="navbar">
             <input id="menu" type="checkbox"/>
             <label for='menu'><img src="/static/imgs/settings.png"/></label>
             <nav id="dropdown">
-                <a class='link' href="dashboard.html" onclick="closeMenu()">Dashboard</a>
-                <a class="link" href="help.html" onclick="closeMenu()">Help</a>
+                <a class='link' href="dashboard" onclick="closeMenu()">Dashboard</a>
+                <a class="link" href="help" onclick="closeMenu()">Help</a>
                 <a class='link' onclick="toggleDarkmode()">Light/Darkmode</a>
-                <a class="link" href="about.html" onclick="closeMenu()">About</a>
+                <a class="link" href="about" onclick="closeMenu()">About</a>
             </nav>
         </nav>
     </div>
