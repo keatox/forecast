@@ -33,7 +33,7 @@ class Preprocess:
     # loads stopwords from .txt file
     def init_stopwords(self):
         stopword = list(string.punctuation)
-        with open("static/stopwords.txt", "r") as my_file:
+        with open("res/stopwords.txt", "r") as my_file:
             for line in my_file:
                 stopword.append(line.strip())
         return stopword
