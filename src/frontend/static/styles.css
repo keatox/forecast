@@ -72,7 +72,6 @@ body{
     flex: 3;
     font-size: 25px;
     margin-top: 16px;
-
 }
 
 #menu{
@@ -82,7 +81,7 @@ body{
 a, button{
     color: #fff;
     text-decoration: none;
-  }
+}
 
 nav{
     flex: 1;
@@ -177,7 +176,18 @@ li{
     }
 }
 
+.landing{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#logo{
+    width: 60%;
+}
+
 #landingsearch{
+    text-align: center;
     height: 40px;
     width: 50%;
     border-radius: 20px;
