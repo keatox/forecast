@@ -1,11 +1,11 @@
 body{  
-    background-color: #333333;
     color: #d3d3d3;
-    font-family: "Arial";
-    background-image: url("/static/imgs/background.png");
-    background-blend-mode: overlay;
+    font-family: "Arial"; 
     margin: 0;
     padding: 0;
+    background-image: url("/static/imgs/background.png");
+    background-color: rgb(51,51,51);
+    background-blend-mode: overlay;
 }
 
 .darkmodebody{
@@ -184,11 +184,12 @@ li{
 
 #logo{
     width: 60%;
+    margin-top: 6%;
 }
 
 #landingsearch{
     text-align: center;
     height: 40px;
-    width: 50%;
+    width: 30%;
     border-radius: 20px;
 }
