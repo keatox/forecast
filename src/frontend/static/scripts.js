@@ -14,12 +14,23 @@ function toggleDarkmode(){
     }
 }
 
-function handle(input){
-    if (input.keyCode === 13){
-        input.preventDefault();
-        window.location.href = "dashboard";
-    }
-}
+// function handle(input){
+//     if (input.keyCode === 13){
+//         input.preventDefault();
+
+//         data = {
+//             'ticker': document.getElementById('landingsearch').value
+//         }
+//         jsonData = JSON.stringify(data);
+//         fetch('food_summary', {
+//             method: "POST",
+//             headers: {
+//                 'Content-type': 'application/json'
+//             },
+//             body: jsonData
+//         })
+//     }
+// }
 
 function closeMenu(){
     document.getElementById('menu').checked = false;
