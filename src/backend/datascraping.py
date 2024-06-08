@@ -1,5 +1,6 @@
 import praw
 import os         
+import numpy as np
 from dotenv import load_dotenv, find_dotenv
 from preprocess import Preprocess
 from sentimodel import Sentimodel
@@ -11,6 +12,7 @@ class Datascraping:
         KEY = os.getenv("REDDIT_API_KEY")
         SECRET = os.getenv("REDDIT_API_SECRET")
 
+        self.__tickers = np.loadtxt('res/nasdaq.csv',skiprows=1,usecols=0,dtype=str,delimiter=',')
         self.__model = Sentimodel()
         self.__process = Preprocess()
         self.__reddit = praw.Reddit(client_id=KEY,
@@ -37,3 +39,8 @@ class Datascraping:
             if predictions[i] == 'positive':
                 sum += 1
         print("%.2f" % (10 * sum/len(predictions)))
+
+    def is_valid_stock(self,stock):
+        if stock in self.__tickers:
+            return True
+        return False
