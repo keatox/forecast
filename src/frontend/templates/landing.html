@@ -13,9 +13,13 @@
 
 <body>
     <img id="logo" class='landing' src="static/imgs/logo.png"/>
-    <form action="#">
-        <input id='landingsearch' class='landing' type="search" onkeypress="handle(event)" placeholder="Enter a stock"/>
+    <form method='POST' action="/">
+        <input name='landingsearch' id='landingsearch' class='landing' type="search" placeholder="Enter a stock" required/>
+                <!-- onkeypress="handle(event)" -->
     </form> 
+    {% if error %}
+        <div id="error">{{ error }}</div>
+    {% endif %}
 </body>
 
 </html>
