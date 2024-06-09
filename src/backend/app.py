@@ -1,27 +1,60 @@
-from flask import Flask, render_template, request
-# from datascraping import Datascraping
-# from predict import Predict
+from flask import Flask, render_template, request, redirect, url_for
+from datascraping import Datascraping
+from predict import Predict
 
-# #add error handling for unknown stock
-# stock = 'AAPL'
-# scraper = Datascraping()
-# model = Predict()
-
-# scraper.scrape(stock)
-
+scraper = Datascraping()
+model = Predict()
 app = Flask(__name__,template_folder='../frontend/templates',static_folder='../frontend/static')
 
-@app.route('/')
-def landing():
-    return render_template('landing.html')
+stock=''
+data = {}
+new_data = False
+
+@app.route('/',methods=['GET','POST'])
+def main():
+    global stock
+    global new_data
+    if request.method == 'POST':
+        query = request.form
+        if query.get('landingsearch'):
+            stock = query.get('landingsearch').upper()
+            if scraper.is_valid_stock(stock):
+                new_data = True
+                return dashboard()
+            else:
+                return render_template('landing.html',error="unknown stock ticker")
+        elif query.get('dashsearch'):
+            temp = query.get('dashsearch').upper()
+            if scraper.is_valid_stock(temp):
+                stock = temp
+                new_data = True
+                return dashboard()
+            else:
+                return render_template('dashboard.html',
+                                       error="unknown stock ticker",
+                                       ticker=stock,
+                                       score=data['score'],
+                                       positive=data['positive'],
+                                       negative=data['negative'])
+    else:
+        return render_template('landing.html')
 
 @app.route('/about')
 def about():
     return render_template('about.html')
 
-@app.route('/dashboard')
+@app.route('/dashboard',methods=['GET','POST'])
 def dashboard():
-    return render_template('dashboard.html')
+    global data
+    global new_data
+    if new_data:
+        data = scraper.scrape(stock)
+        new_data = False
+    return render_template('dashboard.html',
+                           ticker=stock,
+                           score=data['score'],
+                           positive=data['positive'],
+                           negative=data['negative'])
 
 @app.route('/help')
 def help():
