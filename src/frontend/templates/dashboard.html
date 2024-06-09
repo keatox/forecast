@@ -26,29 +26,36 @@
             </nav>
         </nav>
     </div>
-
+    <p id="ticker"><b>{{ ticker }}</b><p>
     <div id="content">
         <div id="graph">
             <img src="/static/imgs/example.png" alt='Stock chart' id="plot">
             <div id="block" class="data">
-                Apple AAPL<br>ahdeahaeuhd<br>a<br>bi
+                ahdeahaeuhd<br>a<br>bi
+                <form method='POST' action="/">
+                    <input name='dashsearch' id='dashsearch' type="search" placeholder="Enter new stock" required/>
+                            <!-- onkeypress="handle(event)" -->
+                </form> 
+                {% if error %}
+                    <div id="error2">{{ error }}</div>
+                {% endif %}
             </div>
         </div>
         <div id="block" class="sidebar">
-            <div id='sentiment'>Sentiment</div><br>
-            <div id="score">10</div><br>
-            <u>Top Comments</u>
+            <div id='sentiment'><b>Sentiment</b></div><br>
+            <div id="score">{{ score }}</div><br>
+            <b>Top Comments</b><hr id="linebreak">
             <ul class="comments">
-                <div style='text-align: center;margin-top:-5%;'>Positive:</div>
-                <li>commeaf</li>
-                <li>comment</li>
-                <li>comment</li>
+                <div style='text-align: left;margin-top:-5%;'><b>Positive</b></div>
+                <li>{{ positive[0] }}</li>
+                <li>{{ positive[1] }}</li>
+                <li>{{ positive[2] }}</li>
             </ul>
             <ul class="comments">
-                <div style='text-align: center;margin-top:-10%;'>Negative:</div>
-                <li>commeaf</li>
-                <li>comment</li>
-                <li>comment</li>
+                <div style='text-align: left;margin-top:-5%;'><b>Negative</b></div>
+                <li>{{ negative[0] }}</li>
+                <li>{{ negative[1] }}</li>
+                <li>{{ negative[2] }}</li>
             </ul>
         </div>
     </div>
