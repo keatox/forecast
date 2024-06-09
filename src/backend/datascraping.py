@@ -30,16 +30,34 @@ class Datascraping:
         counts = self.__model.vectorize(tokens)
         predictions = self.__model.prediction(counts)
 
-        # prints each term and respective prediction
-        [print(terms[i][0],[predictions[i].upper()]) for i in range(len(predictions))]
+        # gets top positive and negative comments
+        comments = [(terms[i][0],[predictions[i]]) for i in range(len(predictions))]
+        positive,negative = [],[]
+        x,y = 3,3
+        for comment in comments:
+            if x <= 0 and y <=0:
+                break
+            if len(comment[0]) >= 30:
+                phrase = " ".join(comment[0].split()[0:30]) + "..."
+            if comment[1][0] == 'positive' and x > 0:
+                positive.append(phrase)
+                x -= 1
+            else:
+                negative.append(phrase)
+                y -=1
         
-        # prints sentiment score out of 10
+        # calculates sentiment score out of 10
         sum = 0
         for i in range(len(predictions)):
             if predictions[i] == 'positive':
                 sum += 1
-        print("%.2f" % (10 * sum/len(predictions)))
 
+        return {'score':("%.1f" % (10 * sum/len(predictions))),
+                'positive': positive,
+                'negative': negative
+               }
+
+    # checks if stock ticker is within list of known stocks
     def is_valid_stock(self,stock):
         if stock in self.__tickers:
             return True
