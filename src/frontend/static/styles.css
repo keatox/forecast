@@ -121,6 +121,7 @@ nav{
     width: 64.35vw;
     background-color: #3a3b3c;
     border-radius: 5px;
+    margin-bottom: 2%;
 }
 
 .data{
@@ -128,6 +129,7 @@ nav{
     text-align: left;
     border-radius: 5px;
     background-color: #3a3b3c;
+    margin-bottom: 1.5%;
 }
 
 #block{
@@ -135,7 +137,6 @@ nav{
     border-style: solid;
     padding: 1%; 
     box-shadow: 0 10px 10px rgb(0 0 0 / 0.2);
-    margin-bottom: 2%;
 }
 
 .sidebar{
@@ -144,6 +145,7 @@ nav{
     margin-right: 2%;
     border-radius: 10px;
     background-color: #3a3b3c;
+    margin-bottom: 1.9%;
 }
 
 #linebreak{
@@ -161,6 +163,7 @@ nav{
 
 #sentiment{
     font-size: 20px;
+    margin-top: 5px;
 }
 
 #score{
