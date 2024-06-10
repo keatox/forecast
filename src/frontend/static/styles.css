@@ -187,6 +187,19 @@ nav{
 li{
     margin-top: 3%;
     font-size: 13px;
+    width: 100%;
+    height: 100%;
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -ms-box-orient: vertical;
+    box-orient: vertical;
+    -webkit-line-clamp: 3;
+    -moz-line-clamp: 3;
+    -ms-line-clamp: 3;
+    line-clamp: 3;
+    overflow: hidden;
 }
 
 /* 768px */
