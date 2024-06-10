@@ -8,6 +8,7 @@ app = Flask(__name__,template_folder='../frontend/templates',static_folder='../f
 
 stock=''
 data = {}
+pred = {}
 new_data = False
 
 @app.route('/',methods=['GET','POST'])
@@ -46,15 +47,18 @@ def about():
 @app.route('/dashboard',methods=['GET','POST'])
 def dashboard():
     global data
+    global pred
     global new_data
     if new_data:
         data = scraper.scrape(stock)
+        pred = model.predict_prices(stock)
         new_data = False
     return render_template('dashboard.html',
                            ticker=stock,
                            score=data['score'],
                            positive=data['positive'],
-                           negative=data['negative'])
+                           negative=data['negative'],
+                           chart=pred['chart'])
 
 @app.route('/help')
 def help():
