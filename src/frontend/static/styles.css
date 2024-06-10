@@ -210,6 +210,10 @@ li{
         text-align: center;
     }
 
+    #info{
+        margin-left: 15%;
+    }
+
     .plot{
         width: 94vw;
     }
