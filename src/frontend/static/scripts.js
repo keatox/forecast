@@ -1,21 +1,3 @@
-// function handle(input){
-//     if (input.keyCode === 13){
-//         input.preventDefault();
-
-//         data = {
-//             'ticker': document.getElementById('landingsearch').value
-//         }
-//         jsonData = JSON.stringify(data);
-//         fetch('food_summary', {
-//             method: "POST",
-//             headers: {
-//                 'Content-type': 'application/json'
-//             },
-//             body: jsonData
-//         })
-//     }
-// }
-
 // closes dropdown everytime a new page is loaded
 // so that if one backtracks pages it is closed
 function closeMenu(){
