@@ -118,20 +118,17 @@ nav{
 }
 
 #plot{
-    width: 100%;
-    border-radius: 5px; 
-    margin-bottom: 2%;
-    box-shadow: 0 10px 10px rgb(0 0 0 / 0.3);
+    width: 64vw;
 }
 
 .data{
     height: 100%;
     text-align: left;
-    background-color: #3a3b3c;
     border-radius: 5px;
 }
 
 #block{
+    background-color: #3a3b3c;
     border-width: 0px;
     border-style: solid;
     padding: 1%; 
@@ -142,7 +139,6 @@ nav{
 .sidebar{
     flex: 0.8;
     text-align: center;
-    background-color: #3a3b3c;
     margin-right: 2%;
     border-radius: 20px;
 }
@@ -196,6 +192,14 @@ li{
     .sidebar{
         margin-left: 2%;
         margin-right: 2%;
+    }
+
+    .data{
+        text-align: center;
+    }
+
+    #plot{
+        width: 95vw;
     }
 }
 
