@@ -37,13 +37,11 @@ class Datascraping:
         for comment in comments:
             if x <= 0 and y <=0:
                 break
-            if len(comment[0]) >= 30:
-                phrase = " ".join(comment[0].split()[0:30]) + "..."
             if comment[1][0] == 'positive' and x > 0:
-                positive.append(phrase)
+                positive.append(comment[0])
                 x -= 1
             else:
-                negative.append(phrase)
+                negative.append(comment[0])
                 y -=1
         
         # calculates sentiment score out of 10
