@@ -132,6 +132,11 @@ nav{
     margin-bottom: 1.5%;
 }
 
+.inlay{
+    display: inline; 
+    opacity: 0.75;
+}
+
 #block{
     border-width: 0px;
     border-style: solid;
