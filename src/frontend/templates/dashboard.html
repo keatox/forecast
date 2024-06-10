@@ -29,12 +29,11 @@
     <p id="ticker"><b>{{ ticker }}</b><p>
     <div id="content">
         <div id="graph">
-            <img src="/static/imgs/example.png" alt='Stock chart' id="plot">
+            <div id="block"><div id="plot">{{ chart|safe }}</div></div>
             <div id="block" class="data">
                 ahdeahaeuhd<br>a<br>bi
                 <form method='POST' action="/">
                     <input name='dashsearch' id='dashsearch' type="search" placeholder="Enter new stock" required/>
-                            <!-- onkeypress="handle(event)" -->
                 </form> 
                 {% if error %}
                     <div id="error2">{{ error }}</div>
