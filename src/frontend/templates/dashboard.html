@@ -31,7 +31,6 @@
         <div id="graph">
             <div id="block" class="plot">{{ chart|safe }}</div>
             <div id="block" class="data">
-                <div class="center">{{ ticker }}</div>
                 <form method='POST' action="/" class="center">
                     <input name='dashsearch' id='dashsearch' type="search" placeholder="Enter new stock" required/>
                 </form> 
@@ -40,6 +39,7 @@
                 {% else %}
                     <br>
                 {% endif %}
+                <div class="center">{{ ticker }}</div><br>
                 <div id='info' style="float: left;">
                     Predicted price:<br>
                     Original price:<br>
