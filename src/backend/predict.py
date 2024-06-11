@@ -46,17 +46,23 @@ class Predict:
                           margin=dict(l=20, r=20, t=20, b=20),
                           autosize=True)
 
-        #delete later
-        # plt.show()
-
-        info.update({'chart': plt.to_html(full_html=False,config={'displayModeBar': False}),
+        info.update({'chart': plt.to_html(full_html=False,config={'displayModeBar': False, 'scrollZoom': True}),
                      'initial': '%.2f' % self.__prices.iloc[-1].values[0],
                      'predicted': '%.2f' % prediction,
                      'change': '%.2f' % float(100 * ((prediction - self.__prices.iloc[-1])/self.__prices.iloc[-1]).values[0])})
         return info
     
     def condense_num(self,num):
-        pass
+        if num <= 1000:
+            return num
+        elif num < 1000000:
+            return '%.2fK' % (num/1000) 
+        elif num < 1000000000:
+            return '%.2fM' % (num/1000000)
+        elif num < 1000000000000:
+            return '%.2fB' % (num/1000000000) 
+        else: 
+            return '%.2fT' % (num/1000000000000) 
     
     def get_prices(self,stock):
         ticker = yf.Ticker(stock)
