@@ -32,11 +32,22 @@ def main():
                 return dashboard()
             else:
                 return render_template('dashboard.html',
-                                       error="unknown stock ticker",
-                                       ticker=stock,
-                                       score=data['score'],
-                                       positive=data['positive'],
-                                       negative=data['negative'])
+                                        ticker=stock,
+                                        score=data['score'],
+                                        positive=data['positive'],
+                                        negative=data['negative'],
+                                        chart=pred['chart'],
+                                        fullname=pred['fullname'],
+                                        pprice=pred['predicted'],
+                                        oprice=pred['initial'],
+                                        change=pred['change'],
+                                        high=pred['fiftyTwoWeekHigh'],
+                                        low=pred['fiftyTwoWeekLow'],
+                                        country=pred['country'],
+                                        sector=pred['sector'],
+                                        industry=pred['industry'],
+                                        volume=pred['volume'],
+                                        markcap=pred['markcap'])
     else:
         return render_template('landing.html')
 
@@ -58,7 +69,18 @@ def dashboard():
                            score=data['score'],
                            positive=data['positive'],
                            negative=data['negative'],
-                           chart=pred['chart'])
+                           chart=pred['chart'],
+                           fullname=pred['fullname'],
+                           pprice=pred['predicted'],
+                           oprice=pred['initial'],
+                           change=pred['change'],
+                           high=pred['fiftyTwoWeekHigh'],
+                           low=pred['fiftyTwoWeekLow'],
+                           country=pred['country'],
+                           sector=pred['sector'],
+                           industry=pred['industry'],
+                           volume=pred['volume'],
+                           markcap=pred['markcap'])
 
 @app.route('/help')
 def help():
