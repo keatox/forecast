@@ -17,19 +17,24 @@ def main():
     global new_data
     if request.method == 'POST':
         query = request.form
+        # checks which search bar is being used
         if query.get('landingsearch'):
             stock = query.get('landingsearch').upper()
+            # generates dash if stock exists
             if scraper.is_valid_stock(stock):
                 new_data = True
                 return dashboard()
+            # sends error message if stock is unknown
             else:
                 return render_template('landing.html',error="unknown stock ticker")
         elif query.get('dashsearch'):
             temp = query.get('dashsearch').upper()
+            # generates dash if stock exists
             if scraper.is_valid_stock(temp):
                 stock = temp
                 new_data = True
                 return dashboard()
+            # keeps dash the same otherwise
             else:
                 return render_template('dashboard.html',
                                         error="unknown stock ticker",
@@ -49,6 +54,7 @@ def main():
                                         industry=pred['industry'],
                                         volume=pred['volume'],
                                         markcap=pred['markcap'])
+    # default landing
     else:
         return render_template('landing.html')
 
@@ -61,6 +67,7 @@ def dashboard():
     global data
     global pred
     global new_data
+    # generates new dash if new stock is inputted
     if new_data:
         data = scraper.scrape(stock)
         pred = model.predict_prices(stock)

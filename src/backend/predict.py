@@ -10,11 +10,13 @@ class Predict:
     def __init__(self):
         self.__prices = None
 
+    # returns predicted prices in graph and numerical form
     def predict_prices(self,stock,days=90,iters=10000):
         info = self.get_prices(stock)
-        price_paths = self.compute_returns(stock,days,iters)
+        price_paths = self.compute_returns(days,iters)
         prediction = price_paths.mean(axis=1)[-1]
 
+        # can be used to test accuracy of model
         """
         from sklearn.metrics import mean_absolute_error, mean_squared_error
         mae = mean_absolute_error(self.__prices.iloc[-days-1:-1], price_paths.mean(axis=1))
@@ -25,6 +27,7 @@ class Predict:
         print(f'Root Mean Squared Error (RMSE): {rmse}')
         """
 
+        # graph instantiation
         plt = px.line(self.__prices)
 
         new_dates = [self.__prices[stock].index[-1] + timedelta(days=i) for i in range(0,days)]
@@ -52,6 +55,7 @@ class Predict:
                      'change': '%.2f' % float(100 * ((prediction - self.__prices.iloc[-1])/self.__prices.iloc[-1]).values[0])})
         return info
     
+    # returns abbreviation of large numbers
     def condense_num(self,num):
         if num <= 1000:
             return num
@@ -64,6 +68,7 @@ class Predict:
         else: 
             return '%.2fT' % (num/1000000000000) 
     
+    # queries yfinance to get relevant stock data
     def get_prices(self,stock):
         ticker = yf.Ticker(stock)
         prices = pd.DataFrame()
@@ -79,7 +84,8 @@ class Predict:
                 'fiftyTwoWeekLow': info['fiftyTwoWeekLow'], 
                 'fiftyTwoWeekHigh': info['fiftyTwoWeekHigh']}
 
-    def compute_returns(self,stock,days,iters):
+    # simulate Brownian motion via Monte Carlo
+    def compute_returns(self,days,iters):
         log_return = np.log(1 + self.__prices.pct_change())
         u = log_return.mean()
         var = log_return.var()
