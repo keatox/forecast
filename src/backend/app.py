@@ -32,6 +32,7 @@ def main():
                 return dashboard()
             else:
                 return render_template('dashboard.html',
+                                        error="unknown stock ticker",
                                         ticker=stock,
                                         score=data['score'],
                                         positive=data['positive'],
