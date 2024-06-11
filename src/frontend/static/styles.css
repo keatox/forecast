@@ -255,7 +255,8 @@ li{
 
 #error2{
     margin-top: 0.5%;
-    margin-left: 65px;
+    margin-left: 7%;
+    margin-bottom: 0.5%;
 }
 
 .addtl{
@@ -266,6 +267,13 @@ li{
     margin: 3% auto 3% auto;
     background-color: #3a3b3c;
 } 
+
+@media (max-width: 768px){
+    #error2{
+        text-align: center;
+        margin-left: 0;
+    }
+}
 
 @media (max-width: 1000px){
     .addtl{

@@ -31,7 +31,15 @@
         <div id="graph">
             <div id="block" class="plot">{{ chart|safe }}</div>
             <div id="block" class="data">
-                <div class="center">{{ ticker }}<br><br></div>
+                <div class="center">{{ ticker }}</div>
+                <form method='POST' action="/" class="center">
+                    <input name='dashsearch' id='dashsearch' type="search" placeholder="Enter new stock" required/>
+                </form> 
+                {% if error %}
+                    <div id="error2">{{ error }}</div>
+                {% else %}
+                    <br>
+                {% endif %}
                 <div id='info' style="float: left;">
                     Predicted price:<br>
                     Original price:<br>
@@ -60,12 +68,6 @@
                     <div class="inlay">{{ volume }}</div><br>
                     <div class="inlay">{{ markcap }}</div><br><br>
                 </div>
-                <form method='POST' action="/" class="center">
-                    <input name='dashsearch' id='dashsearch' type="search" placeholder="Enter new stock" required/>
-                </form> 
-                {% if error %}
-                    <div id="error2">{{ error }}</div>
-                {% endif %}
             </div>
         </div>
         <div id="block" class="sidebar">
