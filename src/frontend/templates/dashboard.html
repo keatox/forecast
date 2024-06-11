@@ -26,20 +26,41 @@
             </nav>
         </nav>
     </div>
-    <p id="ticker"><b>{{ ticker }}</b><p>
+    <p id="ticker"><b>{{ fullname }}</b><p>
     <div id="content">
         <div id="graph">
             <div id="block" class="plot">{{ chart|safe }}</div>
             <div id="block" class="data">
-                {{ ticker }}<br>
-                a<br>
-                bi<br>
-                a<br>
-                a<br>
-                a<br>
-                a<br>
-                a
-                <form method='POST' action="/">
+                <div class="center">{{ ticker }}<br><br></div>
+                <div id='info' style="float: left;">
+                    Predicted price:<br>
+                    Original price:<br>
+                    Percent change:<br>
+                    52-wk high:<br>
+                    52-wk low:<br><br>
+                </div>
+                <div style="margin-left: 3%; float: left;">
+                    <div class="inlay">$ {{ pprice }}</div><br>
+                    <div class="inlay">$ {{ oprice }}</div><br>
+                    <div class="inlay">&ensp;&nbsp;&nbsp;{{ change }}%</div><br>
+                    <div class="inlay">$ {{ high }}</div><br>
+                    <div class="inlay">$ {{ low }}</div><br><br>
+                </div>
+                <div style="margin-left: 20%; margin-right: 3%; float: left;">
+                    Country:<br>   
+                    Sector:<br>    
+                    Industry:<br>   
+                    Volume:<br>    
+                    Market cap:<br><br>    
+                </div>
+                <div style="display: block; white-space: nowrap;overflow: hidden;text-overflow:ellipsis;">
+                    <div class="inlay">{{ country }}</div><br>   
+                    <div class="inlay">{{ sector }}</div><br>
+                    <div class="inlay">{{ industry }}</div><br>
+                    <div class="inlay">{{ volume }}</div><br>
+                    <div class="inlay">{{ markcap }}</div><br><br>
+                </div>
+                <form method='POST' action="/" class="center">
                     <input name='dashsearch' id='dashsearch' type="search" placeholder="Enter new stock" required/>
                 </form> 
                 {% if error %}
