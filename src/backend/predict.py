@@ -95,8 +95,3 @@ class Predict:
         for i in range(1, days):
             price_paths[i] = price_paths[i-1]*daily_returns[i]
         return price_paths
-
-#delete later
-stock = 'NVDA'
-model = Predict()
-model.predict_prices(stock)
