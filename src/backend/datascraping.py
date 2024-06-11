@@ -12,7 +12,7 @@ class Datascraping:
         KEY = os.getenv("REDDIT_API_KEY")
         SECRET = os.getenv("REDDIT_API_SECRET")
 
-        self.__tickers = np.loadtxt('res/nasdaq.csv',skiprows=1,usecols=0,dtype=str,delimiter=',')
+        self.__tickers = np.append(np.loadtxt('res/nasdaq.csv',skiprows=1,usecols=0,dtype=str,delimiter=','),np.loadtxt('res/nyse.csv',skiprows=1,usecols=0,dtype=str,delimiter=','))
         self.__model = Sentimodel()
         self.__process = Preprocess()
         self.__reddit = praw.Reddit(client_id=KEY,
