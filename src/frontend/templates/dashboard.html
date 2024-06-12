@@ -26,10 +26,10 @@
             </nav>
         </nav>
     </div>
-    <p id="ticker"><b>{{ fullname }}</b><p>
+    <p id="ticker"><b>{{ pred['fullname'] }}</b><p>
     <div id="content">
         <div id="graph">
-            <div id="block" class="plot">{{ chart|safe }}</div>
+            <div id="block" class="plot">{{ pred['chart']|safe }}</div>
             <div id="block" class="data">
                 <form method='POST' action="/" class="center">
                     <input name='dashsearch' id='dashsearch' type="search" placeholder="Enter new stock" required/>
@@ -48,11 +48,11 @@
                     52-wk low:<br><br>
                 </div>
                 <div style="margin-left: 3%; float: left;">
-                    <div class="inlay">$ {{ pprice }}</div><br>
-                    <div class="inlay">$ {{ oprice }}</div><br>
-                    <div class="inlay">&ensp;&nbsp;&nbsp;{{ change }}%</div><br>
-                    <div class="inlay">$ {{ high }}</div><br>
-                    <div class="inlay">$ {{ low }}</div><br><br>
+                    <div class="inlay">$ {{ pred['predicted'] }}</div><br>
+                    <div class="inlay">$ {{ pred['initial'] }}</div><br>
+                    <div class="inlay">&ensp;&nbsp;&nbsp;{{ pred['change'] }}%</div><br>
+                    <div class="inlay">$ {{ pred['fiftyTwoWeekHigh'] }}</div><br>
+                    <div class="inlay">$ {{ pred['fiftyTwoWeekLow'] }}</div><br><br>
                 </div>
                 <div style="margin-left: 20%; margin-right: 3%; float: left;">
                     Country:<br>   
@@ -62,29 +62,29 @@
                     Market cap:<br><br>    
                 </div>
                 <div style="display: block; white-space: nowrap;overflow: hidden;text-overflow:ellipsis;">
-                    <div class="inlay">{{ country }}</div><br>   
-                    <div class="inlay">{{ sector }}</div><br>
-                    <div class="inlay">{{ industry }}</div><br>
-                    <div class="inlay">{{ volume }}</div><br>
-                    <div class="inlay">{{ markcap }}</div><br><br>
+                    <div class="inlay">{{ pred['country'] }}</div><br>   
+                    <div class="inlay">{{ pred['sector'] }}</div><br>
+                    <div class="inlay">{{ pred['industry'] }}</div><br>
+                    <div class="inlay">{{ pred['volume'] }}</div><br>
+                    <div class="inlay">{{ pred['markcap'] }}</div><br><br>
                 </div>
             </div>
         </div>
         <div id="block" class="sidebar">
             <div id='sentiment'><b>Sentiment</b></div><br>
-            <div id="score">{{ score }}</div><br>
+            <div id="score">{{ data['score'] }}</div><br>
             <b>Top Comments</b><hr id="linebreak">
             <ul class="comments">
                 <div style='text-align: left;margin-top:-3%;'><b>Positive</b></div>
-                <li>{{ positive[0] }}</li>
-                <li>{{ positive[1] }}</li>
-                <li>{{ positive[2] }}</li>
+                {% for item in data['positive'] %}
+                    <li>{{ item }}</li>
+                {% endfor %}
             </ul>
             <ul class="comments">
                 <div style='text-align: left;margin-top:-5%;'><b>Negative</b></div>
-                <li>{{ negative[0] }}</li>
-                <li>{{ negative[1] }}</li>
-                <li style="margin-bottom: -15px">{{ negative[2] }}</li>
+                <li>{{ data['negative'][0] }}</li>
+                <li>{{ data['negative'][1] }}</li>
+                <li style="margin-bottom: -15px">{{ data['negative'][2] }}</li>
             </ul>
         </div>
     </div>
