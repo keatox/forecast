@@ -53,8 +53,14 @@ body {
 }
 
 #menu:checked ~ #dropdown {
-    height: 340px;
+    height: 250px;
   }
+
+#toggle{
+    width: 25px;
+    margin-right: 18px;
+    margin-bottom: 2.5px;
+}
 
 .link {
     width: 100%;
@@ -85,6 +91,7 @@ body {
 
 #menu{
     display: none;
+    background-color: white;
 }
 
 a, button{
