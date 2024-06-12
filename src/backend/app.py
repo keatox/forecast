@@ -20,40 +20,17 @@ def main():
         # checks which search bar is being used
         if query.get('landingsearch'):
             stock = query.get('landingsearch').upper()
-            # generates dash if stock exists
             if scraper.is_valid_stock(stock):
                 new_data = True
                 return dashboard()
-            # sends error message if stock is unknown
             else:
                 return render_template('landing.html',error="unknown stock ticker")
         elif query.get('dashsearch'):
-            temp = query.get('dashsearch').upper()
-            # generates dash if stock exists
-            if scraper.is_valid_stock(temp):
-                stock = temp
+            tempstock = query.get('dashsearch').upper()
+            if scraper.is_valid_stock(tempstock):
+                stock = tempstock
                 new_data = True
-                return dashboard()
-            # keeps dash the same otherwise
-            else:
-                return render_template('dashboard.html',
-                                        error="unknown stock ticker",
-                                        ticker=stock,
-                                        score=data['score'],
-                                        positive=data['positive'],
-                                        negative=data['negative'],
-                                        chart=pred['chart'],
-                                        fullname=pred['fullname'],
-                                        pprice=pred['predicted'],
-                                        oprice=pred['initial'],
-                                        change=pred['change'],
-                                        high=pred['fiftyTwoWeekHigh'],
-                                        low=pred['fiftyTwoWeekLow'],
-                                        country=pred['country'],
-                                        sector=pred['sector'],
-                                        industry=pred['industry'],
-                                        volume=pred['volume'],
-                                        markcap=pred['markcap'])
+            return dashboard(not new_data)
     # default landing
     else:
         return render_template('landing.html')
@@ -63,7 +40,7 @@ def about():
     return render_template('about.html')
 
 @app.route('/dashboard',methods=['GET','POST'])
-def dashboard():
+def dashboard(error=False):
     global data
     global pred
     global new_data
@@ -73,6 +50,7 @@ def dashboard():
         pred = model.predict_prices(stock)
         new_data = False
     return render_template('dashboard.html',
+                           error=error,
                            ticker=stock,
                            score=data['score'],
                            positive=data['positive'],
