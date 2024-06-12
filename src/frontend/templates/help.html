@@ -16,12 +16,12 @@
         <img src="/static/imgs/logo.png"/>
         <div id="sitename">| &nbsp;Help</div>
         <nav id="navbar">
+            <a onclick="toggleDarkmode()"><img id="toggle" src="/static/imgs/toggle.png"/></a>
             <input id="menu" type="checkbox"/>
             <label for='menu'><img src="/static/imgs/settings.png"/></label>
             <nav id="dropdown">
                 <a class='link' href="dashboard" onclick="closeMenu()">Dashboard</a>
                 <a class="link" href="help" onclick="closeMenu()">Help</a>
-                <a class='link' onclick="toggleDarkmode()">Light/Darkmode</a>
                 <a class="link" href="about" onclick="closeMenu()">About</a>
             </nav>
         </nav>
