@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>About</title>
+    <title>About - Forecast</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width"/>
     <link rel="shortcut icon" href="/static/imgs/favicon.ico" type="image/x-icon"/>
@@ -16,15 +16,26 @@
         <img src="/static/imgs/logo.png"/>
         <div id="sitename">| &nbsp;About</div>
         <nav id="navbar">
+            <a onclick="toggleDarkmode()"><img id="toggle" title='Toggle dark mode' src="/static/imgs/toggle.png"/></a>
             <input id="menu" type="checkbox"/>
             <label for='menu'><img src="/static/imgs/settings.png"/></label>
             <nav id="dropdown">
                 <a class='link' href="dashboard" onclick="closeMenu()">Dashboard</a>
                 <a class="link" href="help" onclick="closeMenu()">Help</a>
-                <a class='link' onclick="toggleDarkmode()">Light/Darkmode</a>
                 <a class="link" href="about" onclick="closeMenu()">About</a>
             </nav>
         </nav>
+    </div>
+    <div id="block" class="addtl">
+        <span style="opacity:0.75;">
+            Website to experiment with a couple of concepts learned from a recent data science course!<br><br>
+            I used Monte Carlo methods to simulate Geometric Brownian Motion based on historical stock data from yfinance, 
+            and a support vector classifier to calculate sentiment from Reddit's wallstreetbets.<br>
+            <br><br>Check out the code here:<br><br>
+        </span>
+        <a href="https://github.com/keatox/Forecast" target="_blank">
+            <img style="width: 60px; background-color: white; border-radius: 100%;" src='/static/imgs/octocat.png'/>
+        </a><br><br><br>
     </div>
 </body>
 
