@@ -12,6 +12,8 @@ class Datascraping:
         KEY = os.getenv("REDDIT_API_KEY")
         SECRET = os.getenv("REDDIT_API_SECRET")
 
+        self.data = None
+        self.stock = None
         self.__tickers = np.append(np.loadtxt('res/nasdaq.csv',skiprows=1,usecols=0,dtype=str,delimiter=','),np.loadtxt('res/nyse.csv',skiprows=1,usecols=0,dtype=str,delimiter=','))
         self.__model = Sentimodel()
         self.__process = Preprocess()
@@ -50,13 +52,14 @@ class Datascraping:
             if predictions[i] == 'positive':
                 sum += 1
 
-        return {'score':("%.1f" % (10 * sum/len(predictions))),
-                'positive': positive,
-                'negative': negative
-               }
+        self.data = {'score':("%.1f" % (10 * sum/len(predictions))),
+                     'positive': positive,
+                     'negative': negative
+                    }
 
     # checks if stock ticker is within list of known stocks
     def is_valid_stock(self,stock):
         if stock in self.__tickers:
+            self.stock = stock
             return True
         return False

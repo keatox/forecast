@@ -9,6 +9,7 @@ import plotly.graph_objects as go
 class Predict:
     def __init__(self):
         self.__prices = None
+        self.info = None
 
     # returns predicted prices in graph and numerical form
     def predict_prices(self,stock,days=90,iters=10000):
@@ -53,7 +54,7 @@ class Predict:
                      'initial': '%.2f' % self.__prices.iloc[-1].values[0],
                      'predicted': '%.2f' % prediction,
                      'change': '%.2f' % float(100 * ((prediction - self.__prices.iloc[-1])/self.__prices.iloc[-1]).values[0])})
-        return info
+        self.info = info
     
     # returns abbreviation of large numbers
     def condense_num(self,num):
