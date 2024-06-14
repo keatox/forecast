@@ -103,7 +103,9 @@ nav{
 }
 
 #ticker{
-    margin: -0.25% 0 -0.5% 2%;
+    position: absolute;
+    top: 65px;
+    margin-left: 32%;
     font-size: 18px;
 }
 
@@ -204,6 +206,10 @@ li{
 }
 
 @media (max-width: 768px){
+    #ticker{
+        margin-left: 43%;
+    }
+
     #content{
         flex-direction: column; 
     }
