@@ -5,8 +5,8 @@ services:
     ports:
       - 5001:5000
     environment:
-      REDDIT_API_KEY: ${REDDIT_API_KEY}
-      REDDIT_API_SECRET: ${REDDIT_API_SECRET}
+      - REDDIT_API_KEY: ${REDDIT_API_KEY}
+      - REDDIT_API_SECRET: ${REDDIT_API_SECRET}
 
 # The commented out section below is an example of how to define a PostgreSQL
 # database that your application can use. `depends_on` tells Docker Compose to
