@@ -31,8 +31,9 @@
         <div id="graph">
             <div id="block" class="plot">{{ pred['chart']|safe }}</div>
             <div id="block" class="data">
-                <form method='POST' action="/" class="center">
+                <form method='POST' action="/" id='searchForm' class="center">
                     <input name='dashsearch' id='dashsearch' type="search" placeholder="Enter new stock" required/>
+                    <ul id="results" class="hidden"></ul>
                 </form> 
                 {% if error %}
                     <div id="error2">unknown stock ticker</div>

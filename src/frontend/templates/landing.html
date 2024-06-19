@@ -13,8 +13,9 @@
 
 <body>
     <img id="logo" class='landing' src="static/imgs/logo.png"/>
-    <form method='POST' action="/">
+    <form id='searchForm' method='POST' action="/">
         <input name='landingsearch' id='landingsearch' class='landing' type="search" placeholder="Enter a stock" required/>
+        <ul id="results" class="hidden"></ul>
     </form> 
     {% if error %}
         <div id="error">unknown stock ticker</div>
