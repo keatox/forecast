@@ -1,6 +1,5 @@
 import praw
 import os         
-import numpy as np
 from dotenv import load_dotenv, find_dotenv
 from preprocess import Preprocess
 from sentimodel import Sentimodel
@@ -14,7 +13,6 @@ class Datascraping:
 
         self.data = None
         self.stock = None
-        self.__tickers = np.append(np.loadtxt('res/nasdaq.csv',skiprows=1,usecols=0,dtype=str,delimiter=','),np.loadtxt('res/nyse.csv',skiprows=1,usecols=0,dtype=str,delimiter=','))
         self.__model = Sentimodel()
         self.__process = Preprocess()
         self.__reddit = praw.Reddit(client_id=KEY,
@@ -56,10 +54,3 @@ class Datascraping:
                      'positive': positive,
                      'negative': negative
                     }
-
-    # checks if stock ticker is within list of known stocks
-    def is_valid_stock(self,stock):
-        if stock in self.__tickers:
-            self.stock = stock
-            return True
-        return False
