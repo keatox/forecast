@@ -12,12 +12,11 @@ class Datascraping:
         SECRET = os.getenv("REDDIT_API_SECRET")
 
         self.data = None
-        self.stock = None
         self.__model = Sentimodel()
         self.__process = Preprocess()
         self.__reddit = praw.Reddit(client_id=KEY,
-                            client_secret=SECRET,
-                            user_agent='Sentiment analysis')
+                                    client_secret=SECRET,
+                                    user_agent='Sentiment analysis')
 
     def scrape(self,stock):
         terms = []                                                                   # change limit to determine number of posts to scrape
@@ -25,6 +24,14 @@ class Datascraping:
             terms.append([post.selftext])
         terms = [term for term in terms if term[0] != "" and len(term[0].split()) >= 15]  # removes empty terms to mitigate false negatives
 
+        # error handling for insufficient data
+        if len(terms) == 0:
+            self.data = {'score': '–',
+                         'positive': ["",'Insufficient data',""],
+                         'negative': ["",'Insufficient data',""]
+                        }
+            return
+        
         # processing and prediction
         tokens = [self.__process.preprocess(term)[0] for term in terms]
         counts = self.__model.vectorize(tokens)
