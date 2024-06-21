@@ -58,6 +58,8 @@ class Predict:
     
     # returns abbreviation of large numbers
     def condense_num(self,num):
+        if num == 'N/A':
+            return 'N/A'
         if num <= 1000:
             return num
         elif num < 1000000:
@@ -76,14 +78,14 @@ class Predict:
         prices[stock] = ticker.history(period='1y')['Close']
         self.__prices = prices
         info = ticker.info
-        return {'fullname': info['shortName'],
-                'country': info['country'],
-                'sector': info['sector'],
-                'industry': info['industry'],
-                'volume': self.condense_num(info['volume']),
-                'markcap': self.condense_num(info['marketCap']),
-                'fiftyTwoWeekLow': info['fiftyTwoWeekLow'], 
-                'fiftyTwoWeekHigh': info['fiftyTwoWeekHigh']}
+        return {'fullname': info.get('shortName','N/A'),
+                'country': info.get('country','N/A'),
+                'sector': info.get('sector','N/A'),
+                'industry': info.get('industry','N/A'),
+                'volume': self.condense_num(info.get('volume','N/A')),
+                'markcap': self.condense_num(info.get('marketCap','N/A')),
+                'fiftyTwoWeekLow': info.get('fiftyTwoWeekLow','N/A'), 
+                'fiftyTwoWeekHigh': info.get('fiftyTwoWeekHigh','N/A')}
 
     # simulate Brownian motion via Monte Carlo
     def compute_returns(self,days,iters):
