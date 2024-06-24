@@ -1,8 +1,9 @@
 # Forecast
 
 ## Quickstart:
-create .env in root with REDDIT_API_SECRET and REDDIT_API_KEY
+create .env in root with REDDIT_API_SECRET, REDDIT_API_KEY, POSTGRES_PASSWORD
 
+navigate to root of project folder and run
 
 `docker compose up --build`.
 
