@@ -50,7 +50,17 @@ document.addEventListener('DOMContentLoaded', () => {
     } else{
         var searchInput = dash;
     }
+
+    // submits top autocomplete results on enter
+    searchInput.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter' && resultsContainer.innerHTML != '') {
+            searchInput.value = resultsContainer.firstChild.innerText;
+            clearSuggestions();
+            searchForm.submit();
+        }
+    });
     
+    // generates new queries on each input
     searchInput.addEventListener('input', function() {
         const query = this.value;
         if (query.length > 0) {
