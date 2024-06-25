@@ -24,7 +24,7 @@ class Database:
     def connect_db(self):
         load_dotenv(find_dotenv())
         password = os.getenv('POSTGRES_PASSWORD')
-        host = 'db'     #change to 'localhost' if running locally
+        host = os.getenv('POSTGRES_HOST')
         try:
             conn = psycopg2.connect(dbname='forecastdb',user='postgres',password=password,host=host,port='5432')
             return conn
