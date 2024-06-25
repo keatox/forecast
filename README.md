@@ -11,7 +11,7 @@ comment out app.run(debug=True,host='0.0.0.0') and uncomment app.run(debug=True)
 
 run code
 
-### To run as Docker image
+### To run on Docker
 navigate to root of project folder and run
 
 `docker compose up --build`.
@@ -27,6 +27,3 @@ you'll want to build the image for that platform, e.g.:
 `docker build --platform=linux/amd64 -t myapp .`.
 
 Then, push it to your registry, e.g. `docker push myregistry.com/myapp`.
-
-Consult Docker's [getting started](https://docs.docker.com/go/get-started-sharing/)
-docs for more detail on building and pushing.
