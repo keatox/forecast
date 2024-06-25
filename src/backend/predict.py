@@ -75,7 +75,11 @@ class Predict:
     def get_prices(self,stock):
         ticker = yf.Ticker(stock)
         prices = pd.DataFrame()
-        prices[stock] = ticker.history(period='1y')['Close']
+        hist = ticker.history(period='1y')['Close']
+        if len(hist) <= 0:
+            prices[stock] = ticker.history(period='max')['Close']
+        else:
+            prices[stock] = hist
         self.__prices = prices
         info = ticker.info
         return {'fullname': info.get('shortName','N/A'),
