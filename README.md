@@ -1,8 +1,17 @@
 # Forecast
 
 ## Quickstart:
-create .env in root with REDDIT_API_SECRET, REDDIT_API_KEY, POSTGRES_PASSWORD
+create .env in root with REDDIT_API_SECRET, REDDIT_API_KEY, POSTGRES_PASSWORD, POSTGRES_HOST = localhost
 
+### To run locally
+
+navigate to src/backend/app.py
+
+comment out app.run(debug=True,host='0.0.0.0') and uncomment app.run(debug=True)
+
+run code
+
+### To run as Docker image
 navigate to root of project folder and run
 
 `docker compose up --build`.
