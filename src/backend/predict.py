@@ -31,13 +31,13 @@ class Predict:
         # graph instantiation
         plt = px.line(self.__prices)
 
-        new_dates = [self.__prices[stock].index[-1] + timedelta(days=i) for i in range(0,days)]
+        new_dates = [self.__prices[''].index[-1] + timedelta(days=i) for i in range(0,days)]
         num_graphs = 0
         for i in range(len(price_paths)):
             if num_graphs < 3 and abs(price_paths[:,i][-1] - prediction) <= 0.1 * prediction:
                 plt.add_trace(go.Scatter(x=new_dates, y=price_paths[:,i],mode='lines',opacity=0.35))
                 num_graphs += 1
-        plt.add_vline(x=self.__prices[stock].index[-1],line_color='rgba(211,211,211,0.25)',line_dash='dash')
+        plt.add_vline(x=self.__prices[''].index[-1],line_color='rgba(211,211,211,0.25)',line_dash='dash')
         plt.update_xaxes(gridcolor='rgba(255,255,255,0.1)')
         plt.update_yaxes(gridcolor='rgba(255,255,255,0.1)')
         plt.update_layout(showlegend=False,
@@ -77,9 +77,9 @@ class Predict:
         prices = pd.DataFrame()
         hist = ticker.history(period='1y')['Close']
         if len(hist) <= 0:
-            prices[stock] = ticker.history(period='max')['Close']
+            prices[''] = ticker.history(period='max')['Close']
         else:
-            prices[stock] = hist
+            prices[''] = hist
         self.__prices = prices
         info = ticker.info
         return {'fullname': info.get('shortName','N/A'),
