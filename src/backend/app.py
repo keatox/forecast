@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, jsonify
+from flask_compress import Compress
 from datascraping import Datascraping
 from database import Database
 from predict import Predict
@@ -7,6 +8,7 @@ scraper = Datascraping()
 model = Predict()
 db = Database()
 app = Flask(__name__,template_folder='../frontend/templates',static_folder='../frontend/static')
+Compress(app)
 
 @app.route('/',methods=['GET','POST'])
 def main():

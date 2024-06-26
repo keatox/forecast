@@ -20,7 +20,7 @@ class Datascraping:
 
     def scrape(self,stock):
         terms = []                                                                   # change limit to determine number of posts to scrape
-        for post in self.__reddit.subreddit('wallstreetbets').search(stock,sort="relevance",limit=100):
+        for post in self.__reddit.subreddit('wallstreetbets').search(stock,sort="relevance",limit=50):
             terms.append([post.selftext])
         terms = [term for term in terms if term[0] != "" and len(term[0].split()) >= 15]  # removes empty terms to mitigate false negatives
 
