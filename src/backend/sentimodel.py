@@ -5,13 +5,13 @@ from sklearn.model_selection import train_test_split
 import pickle
 
 class Sentimodel:
-    def __init__(self):
-        self.__data = pd.read_csv("res/IMDB.csv")
+    def __init__(self): 
         self.__process = Preprocess()
-        self.__X = self.__data["review"].values.tolist()
-        self.__Y = self.__data["sentiment"].values
         self.__vectorizer = None
         self.__model = self.tune_model()
+        # self.__data = pd.read_csv("res/IMDB.csv")
+        # self.__X = self.__data["review"].values.tolist()
+        # self.__Y = self.__data["sentiment"].values
 
     # returns a list of predictions with either POSITIVE or NEGATIVE sentiment
     def prediction(self,text):
