@@ -82,8 +82,8 @@ body{
 
 #sitename{
     flex: 3;
-    font-size: 25px;
-    margin-top: 16px;
+    font-size: 20px;
+    margin-top: 20px;
 }
 
 #menu{
@@ -207,7 +207,7 @@ nav{
 
 @media (max-width: 768px){
     #ticker{
-        margin-left: 43%;
+        margin-left: 35%;
     }
 
     #content{
@@ -229,6 +229,16 @@ nav{
 
     .plot{
         width: 94vw;
+    }
+
+    .logo{
+        width: 150px;
+        height: 90%;
+        margin-top: 4px;
+    }
+
+    #data{
+        margin-left: 5% !important
     }
 }
 
@@ -335,6 +345,10 @@ nav{
         text-align: center;
         width: 64%;
         margin-left: 15%;
+    }
+
+    #landingsearch{
+        width: 70%;
     }
 }
 

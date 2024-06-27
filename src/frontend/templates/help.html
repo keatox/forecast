@@ -4,7 +4,7 @@
 <head>
     <title>Help - Forecast</title>
     <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width"/>
+    <meta name="viewport" content="width=device-width" initial-scale=1/>
     <link rel="shortcut icon" href="/static/imgs/favicon.ico" type="image/x-icon"/>
     <link rel="icon" href="/static/imgs/favicon.ico" type="image/x-icon"/>
     <link rel='stylesheet' type='text/css' href="{{ url_for('static',filename='styles.css') }}">
@@ -13,7 +13,7 @@
 
 <body>
     <div id="header">
-        <img src="/static/imgs/logo.png"/>
+        <img class='logo' src="/static/imgs/logo.png"/>
         <div id="sitename">| &nbsp;Help</div>
         <nav id="navbar">
             <a onclick="toggleDarkmode()"><img id="toggle" title='Toggle dark mode' src="/static/imgs/toggle.png"/></a>

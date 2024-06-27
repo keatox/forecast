@@ -4,7 +4,7 @@
 <head>
     <title>Dash - Forecast</title>
     <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width"/>
+    <meta name="viewport" content="width=device-width" initial-scale=1/>
     <link rel="shortcut icon" href="/static/imgs/favicon.ico" type="image/x-icon"/>
     <link rel="icon" href="/static/imgs/favicon.ico" type="image/x-icon"/>
     <link rel='stylesheet' type='text/css' href="{{ url_for('static',filename='styles.css') }}"> 
@@ -13,8 +13,8 @@
 
 <body>
     <div id="header">
-        <img src="/static/imgs/logo.png"/>
-        <div id="sitename">| &nbsp;Dashboard</div>
+        <img class='logo' src="/static/imgs/logo.png"/>
+        <div id="sitename">| &nbsp;Dash</div>
         <nav id="navbar">
             <a onclick="toggleDarkmode()"><img id="toggle" title='Toggle dark mode' src="/static/imgs/toggle.png"/></a>
             <input id="menu" type="checkbox"/>
@@ -55,7 +55,7 @@
                     <div class="inlay">$ {{ pred['fiftyTwoWeekHigh'] }}</div><br>
                     <div class="inlay">$ {{ pred['fiftyTwoWeekLow'] }}</div><br><br>
                 </div>
-                <div style="margin-left: 20%; margin-right: 3%; float: left;">
+                <div id='data' style="margin-left: 20%; margin-right: 3%; float: left;">
                     Country:<br>   
                     Sector:<br>    
                     Industry:<br>   
