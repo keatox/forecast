@@ -15,7 +15,7 @@ body{
 }
 
 .darkmodebody{
-    background-color: #9f9f9f;
+    background-color: #949494;
     color: #2c2c2c;
 }
 
@@ -167,7 +167,7 @@ nav{
 }
 
 .darkmodeblock{
-    background-color: #949494 !important;
+    background-color: #9f9f9f !important;
 }
 
 #sentiment{
