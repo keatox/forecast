@@ -26,6 +26,11 @@ function toggleDarkmode(){
     }
 }
 
+// initiates cleanup function upon exiting window
+window.addEventListener('beforeunload', function (event) {
+    navigator.sendBeacon("/cleanup");
+});
+
 // checks toggle state upon loading new page to keep light/dark mode
 document.addEventListener('DOMContentLoaded', (event) => {
     const savedTheme = localStorage.getItem('theme');
@@ -44,6 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const dash = document.getElementById('dashsearch');
     const resultsContainer = document.getElementById('results');
     const searchForm = document.getElementById('searchForm');
+
+    navigator.sendBeacon("/create_conn");
 
     if (landing){
         var searchInput = landing;
