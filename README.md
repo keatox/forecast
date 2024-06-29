@@ -1,7 +1,7 @@
 # Forecast
 
 ## Quickstart:
-create .env in root with REDDIT_API_SECRET, REDDIT_API_KEY, POSTGRES_PASSWORD, POSTGRES_HOST = localhost
+create .env in root with REDDIT_API_SECRET, REDDIT_API_KEY, POSTGRES_PASSWORD, POSTGRES_HOST, POSTGRES_USER, POSTGRES_PORT, POSTGRES_DB
 
 if creating a new database, uncomment the code in the __init__ of database.py upon first deployment
 
