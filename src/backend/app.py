@@ -59,19 +59,29 @@ def autocomplete():
     query = request.args.get('query', '').strip()
     if query:
         try:
-            conn = db.connect_db()
-            cursor = conn.cursor()
+            cursor = db.conn.cursor()
             cursor.execute("""SELECT * FROM Stocks 
-                            WHERE UPPER(ticker) LIKE UPPER(%s)
-                            OR UPPER(name) LIKE UPPER(%s)
+                            WHERE ticker ILIKE %s
+                            OR name ILIKE %s
                             LIMIT 5;""",(query + '%',query + '%'))
             results = cursor.fetchall()
             cursor.close()
-            conn.close()
             return jsonify([result[1] + " ("+ result[0] +")" for result in results])
         except:
             print("Can't connect to server.")
     return jsonify([])
+
+# opens a connection upon page load
+@app.route('/create_conn',methods=['POST'])
+def create_conn():
+    db.conn = db.connect_db()
+    return jsonify({"status": "success"}), 200
+
+# closes connection upon exiting page
+@app.route('/cleanup',methods=['POST'])
+def cleanup():
+    db.conn.close()
+    return jsonify({"status": "success"}), 200
 
 if __name__ == '__main__':
     app.run(debug=True,host='0.0.0.0')
