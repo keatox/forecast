@@ -56,6 +56,8 @@ def help():
 # gets query from frontend and returns top results
 @app.route('/autocomplete', methods=['GET'])
 def autocomplete():
+    if not db.conn:
+        db.conn = db.connect_db()
     query = request.args.get('query', '').strip()
     if query:
         try:
@@ -81,6 +83,7 @@ def create_conn():
 @app.route('/cleanup',methods=['POST'])
 def cleanup():
     db.conn.close()
+    db.conn = None
     return jsonify({"status": "success"}), 200
 
 if __name__ == '__main__':
