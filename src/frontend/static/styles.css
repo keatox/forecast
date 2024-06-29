@@ -350,6 +350,11 @@ nav{
     #landingsearch{
         width: 70%;
     }
+
+    #results{
+        width: 64%;
+        margin-left: 18%;
+    }
 }
 
 @media (max-width: 1000px){
