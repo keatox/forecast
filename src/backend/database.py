@@ -6,12 +6,13 @@ import os
 class Database:
     def __init__(self):
         self.stock = None
+        self.conn = None
         self.__tickers = np.vstack((np.loadtxt('res/nasdaq.txt',skiprows=1,dtype=str,delimiter='\t'),
                                     np.loadtxt('res/nyse.txt',skiprows=1,dtype=str,delimiter='\t')))
-        try:
-            self.init_table()
-        except:
-            print("Could not connect to server.")
+        # try:
+        #     self.init_table()
+        # except:
+        #     print("Could not connect to server.")
 
     # checks if stock ticker is within list of known stocks
     def is_valid_stock(self,stock):
@@ -25,8 +26,11 @@ class Database:
         load_dotenv(find_dotenv())
         password = os.getenv('POSTGRES_PASSWORD')
         host = os.getenv('POSTGRES_HOST')
+        dbname = os.getenv('POSTGRES_DB')
+        user = os.getenv('POSTGRES_USER')
+        port = os.getenv('POSTGRES_PORT')
         try:
-            conn = psycopg2.connect(dbname='forecastdb',user='postgres',password=password,host=host,port='5432')
+            conn = psycopg2.connect(dbname=dbname,user=user,password=password,host=host,port=port)
             return conn
         except psycopg2.Error as error:
             print("Unable to connect to the database")
