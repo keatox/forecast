@@ -1,31 +1,42 @@
-# Forecast
+# <img src='src/frontend/static/imgs/logo_small.png' width=200/>
 
-## Quickstart:
-create .env in root with REDDIT_API_SECRET, REDDIT_API_KEY, POSTGRES_PASSWORD, POSTGRES_HOST, POSTGRES_USER, POSTGRES_PORT, POSTGRES_DB
+Stock prediction [dashboard](https://forecastapp.onrender.com/) utilizing Monte Carlo to simulate Brownian Motion, and a Support Vector Machine to calculate public sentiment of stocks.
 
-if creating a new database, uncomment the code in the __init__ of database.py upon first deployment
+## Dependencies
+Developed and tested using Python 3.12
 
-### To run locally
+Install necessary libraries using `pip install -r requirements`
 
-navigate to src/backend/app.py
+## Quickstart
 
-comment out app.run(debug=True,host='0.0.0.0') and uncomment app.run(debug=True)
+Create a .env file in root directory with the following variables initialized:
 
-run code
+`REDDIT_API_KEY`,
+`REDDIT_API_SECRET`,
+`POSTGRES_PASSWORD`,
+`POSTGRES_HOST`,
+`POSTGRES_USER`,
+`POSTGRES_PORT`,
+`POSTGRES_DB`
 
-### To run on Docker
-navigate to root of project folder and run
+If creating a new database, uncomment the code in the __init __ of database.py upon first deployment.
 
-`docker compose up --build`.
+### Running locally
 
-Your application will be available at http://localhost:5001.
+Navigate to `src/backend/app.py`
 
-### Deploying your application to the cloud
+Comment out `app.run(debug=True,host='0.0.0.0')` and uncomment `app.run(debug=True)`
 
-First, build your image, e.g.: `docker build -t myapp .`.
-If your cloud uses a different CPU architecture than your development
-machine (e.g., you are on a Mac M1 and your cloud provider is amd64),
-you'll want to build the image for that platform, e.g.:
-`docker build --platform=linux/amd64 -t myapp .`.
+Run `app.py`
 
-Then, push it to your registry, e.g. `docker push myregistry.com/myapp`.
+### Running on Docker
+Navigate to root of project folder and run `docker compose up --build`
+
+Your application will be available at http://localhost:5001
+
+### Deploying to cloud
+
+Build image using `docker build -t myapp . `  
+(for macOS use `docker build --platform=linux/amd64 -t myapp .`)
+
+Push to registry, e.g. `docker push myregistry.com/myapp`
