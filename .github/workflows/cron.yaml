@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Restart service
-        run: |
+        run: >-
           curl --request POST \
           --url https://api.render.com/v1/services/${{ secrets.SERVICEID }}/restart \
           --header 'accept: application/json' \
