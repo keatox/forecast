@@ -1,0 +1,17 @@
+name:
+  First Cron Job
+ 
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+ 
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restart service
+        run: |
+          curl --request POST \
+          --url https://api.render.com/v1/services/${{ secrets.SERVICEID }}/restart \
+          --header 'accept: application/json' \
+          --header 'authorization: Bearer ${{ secrets.BEARER }}'
