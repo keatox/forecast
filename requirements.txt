@@ -8,4 +8,4 @@ psycopg2_binary==2.9.9
 python-dotenv==1.0.1
 scikit_learn==1.4.1.post1
 scipy==1.14.0
-yfinance==0.2.40
+yfinance==0.2.59
